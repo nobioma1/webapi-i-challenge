@@ -8,9 +8,41 @@ server.use(express.json());
 const PORT = process.env.PORT || 5000;
 
 // routes
-server.get('/', (req, res) => {
-  res.status(200).send('Server Up')
-})
+const routes = {
+  base: '/',
+  api: '/api/users',
+};
+
+server.post(routes.api, async (req, res) => {
+  try {
+    const name = req.body.name.trim();
+    const bio = req.body.bio.trim();
+
+    if (name && bio) {
+      const userDetails = { name, bio };
+      const newUser = await db.insert(userDetails);
+      res.status(201).json({ ...newUser, ...userDetails });
+    } else {
+      res
+        .status(400)
+        .json({ errorMessage: 'Please provide name and bio for the user.' });
+    }
+  } catch {
+    res.status(500).json({
+      errorMessage: 'There was an error while saving the user to the database',
+    });
+  }
+});
+
+server.get(routes.api, (req, res) => {});
+
+server.get(routes.api, (req, res) => {});
+
+server.delete(routes.api, (req, res) => {});
+
+server.get(routes.base, (req, res) => {
+  res.status(200).send('Server Up');
+});
 
 server.listen(PORT, () => {
   console.log(`Server is live @ 127.0.0.1:${PORT}`);
