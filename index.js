@@ -34,15 +34,20 @@ server.post(routes.api, async (req, res) => {
   }
 });
 
-server.get(routes.api, (req, res) => {});
+server.get(routes.api, async (req, res) => {
+  try {
+    const allUsers = await db.find();
+    res.status(200).json(allUsers);
+  } catch {
+    res
+      .status(500)
+      .json({ error: 'The users information could not be retrieved.' });
+  }
+});
 
 server.get(routes.api, (req, res) => {});
 
 server.delete(routes.api, (req, res) => {});
-
-server.get(routes.base, (req, res) => {
-  res.status(200).send('Server Up');
-});
 
 server.listen(PORT, () => {
   console.log(`Server is live @ 127.0.0.1:${PORT}`);
