@@ -1,9 +1,12 @@
 const express = require('express');
+const cors = require('cors');
 
 const db = require('./data/db');
 
 const server = express();
+
 server.use(express.json());
+server.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
@@ -92,7 +95,7 @@ server.put(`${routes.api}/:id`, async (req, res) => {
 
       if (name && bio) {
         const newUserDetails = { name, bio };
-        const newUserId =  await db.update(id, newUserDetails);
+        const newUserId = await db.update(id, newUserDetails);
         res.status(200).json({ ...newUserId, ...newUserDetails });
       } else {
         res
@@ -102,7 +105,7 @@ server.put(`${routes.api}/:id`, async (req, res) => {
     } else {
       res
         .status(404)
-        .json({ message: "The user with the specified ID does not exist." });
+        .json({ message: 'The user with the specified ID does not exist.' });
     }
   } catch {
     res.status(500).json({
