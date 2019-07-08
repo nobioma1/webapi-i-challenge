@@ -40,8 +40,8 @@ class App extends Component {
     return (
       <AppContainer>
         <h1>Users</h1>
-        <Users openForm={this.openForm} userId={userId} isOpen={isOpen} />
         {!isOpen && <button onClick={this.openForm}>Add User</button>}
+        <Users openForm={this.openForm} userId={userId} isOpen={isOpen} />
         {isOpen && <UserForm id={userId} closeForm={this.closeForm} />}
       </AppContainer>
     );

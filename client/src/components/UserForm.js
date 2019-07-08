@@ -88,8 +88,8 @@ class UserForm extends Component {
             required
           />
           <button type="submit">{id ? 'Update' : 'Submit'}</button>
+          </form>
           <button onClick={this.props.closeForm}>Cancel</button>
-        </form>
       </FormContainer>
     );
   }
