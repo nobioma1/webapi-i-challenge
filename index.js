@@ -64,6 +64,23 @@ server.get(`${routes.api}/:id`, async (req, res) => {
   }
 });
 
+server.delete(`${routes.api}/:id`, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await db.remove(id);
+
+    if (user) {
+      res.status(204).json();
+    } else {
+      res
+        .status(404)
+        .json({ message: 'The user with the specified ID does not exist.' });
+    }
+  } catch {
+    res.status(500).json({ error: 'The user could not be removed' });
+  }
+});
+
 
 server.delete(routes.api, (req, res) => {});
 
