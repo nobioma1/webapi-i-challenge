@@ -20,16 +20,16 @@ server.post(routes.api, async (req, res) => {
 
     if (name && bio) {
       const userDetails = { name, bio };
-      const newUser = await db.insert(userDetails);
-      res.status(201).json({ ...newUser, ...userDetails });
+      const newUserId = await db.insert(userDetails);
+      res.status(201).json({ ...newUserId, ...userDetails });
     } else {
       res
         .status(400)
-        .json({ errorMessage: 'Please provide name and bio for the user.' });
+        .json({ message: 'Please provide name and bio for the user.' });
     }
   } catch {
     res.status(500).json({
-      errorMessage: 'There was an error while saving the user to the database',
+      error: 'There was an error while saving the user to the database',
     });
   }
 });
