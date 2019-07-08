@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 
 import { getUsers, deleteUser } from '../actions';
 
-const UsersContainer = styled.div`
-
-`;
+const UsersContainer = styled.div``;
 
 const User = styled.div`
   border: 1px solid gray;

@@ -11,8 +11,11 @@ const FormContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     input {
+      width: 80%;
+      margin: 5px;
       padding: 10px;
       border: 1px solid gray;
     }
@@ -85,8 +88,8 @@ class UserForm extends Component {
             required
           />
           <button type="submit">{id ? 'Update' : 'Submit'}</button>
+          <button onClick={this.props.closeForm}>Cancel</button>
         </form>
-        <button onClick={this.props.closeForm}>Cancel</button>
       </FormContainer>
     );
   }

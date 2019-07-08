@@ -10,6 +10,12 @@ const AppContainer = styled.div`
   @media (max-width: 500px) {
     width: 100%;
   }
+
+  button {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 3px;
+  }
 `;
 
 class App extends Component {
